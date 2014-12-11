@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <style>
+        .customTapMask{
+            position: absolute;
+            left: 0;
+            right:0;
+            top: 0;
+            bottom:0;
+            background: rgba(0,0,0,.5);
+        }
+        .customTapContent{
+            margin: 0 5%;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="customTapMask" id="customTapMask"></div>
+    <div class="customTapContent" id="customTapContent">
+        <a rel="external" href="http://m.sohu.com" id="customTapContentLink">搜狐</a>
+    </div>
+    <div class="customTapInfoWrap" id="customTapInfoWrap"></div>
+    <script>
+        window.onload = function(){
+            (function(){
+                var customTapMask = document.getElementById('customTapMask');
+                var customTapContent = document.getElementById('customTapContent');
+                var customTapInfoWrap = document.getElementById('customTapInfoWrap');
+                customTapMask.addEventListener('touchstart',customTapHandle);
+                customTapMask.addEventListener('touchend',customTapHandle);
+                customTapContent.addEventListener('click',customTapHandle);
+
+                function customTapHandle(e){
+                    var ev = e.type;
+                    var targ = e.target;
+                    var customTapInfoEle = document.createElement('p');
+                    customTapInfoEle.innerHTML = 'Event:' + ev + ';Target Id:' + targ.id + '<br/>';
+                    customTapInfoWrap.appendChild(customTapInfoEle);
+                    if(targ.id === 'customTapMask'){
+                        customTapMask.style.display = 'none';
+                    };
+                    // 如果当前所触发的事件是touchend,那么屏蔽掉在touchend之后执行的click事件
+                    if(ev === 'touchend'){
+                        e.preventDefault();
+                    };
+                };
+            })();
+        };
+    </script>
+</body>
+</html>

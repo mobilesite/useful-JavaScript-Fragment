@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    height: 1000px;
+}
+
+a {
+    color: #08c;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #005580;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.showBtn {
+    width: 700px;
+    margin: 20px auto;
+}
+
+p {
+    line-height: 26px;
+    padding: 3px 0;
+}
+
+input {
+    width: 100px;
+    height: 26px;
+    line-height: 26px;
+    background: #eee;
+    border: 1px #ccc solid;
+    cursor: pointer;
+    color: #F66;
+    margin-left: 6px;
+}
+
+h4 {
+    font-size: 17.5px;
+    margin: 10px 0;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 20px;
+    color: inherit;
+    text-rendering: optimizelegibility
+}
+
+.popwind {
+    width: 360px;
+    padding: 32px 0;
+    border-radius: 6px;
+    background: #f0f0f0;
+    display: none;
+    overflow: hidden;
+}
+
+.popwind h3.mytitle {
+    width: 100%;
+    height: 30px;
+    border-bottom: 2px #ddd solid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-indent: 1em;
+    line-height: 30px;
+    z-index: 0;
+}
+
+.popwind .content {
+    position: relative;
+    max-height: 400px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.popwind .title {
+    border: 1px solid #eee;
+}
+
+.popwind .tclose {
+    font-size: 16px;
+    position: absolute;
+    right: 8px;
+    top: 3px;
+    cursor: pointer;
+    z-index: 9;
+}
+
+.master {
+    position: absolute;
+    background: #000;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    left: 0;
+    top: 0;
+}
+
+.popwind .dragbar, .popwind .mytitle {
+    cursor: move;
+}
+
+.popwind .bigest, .popwind .midBtn {
+    position: absolute;
+    top: 8px;
+    right: 26px;
+    border: 1px #666 solid;
+    border-top: 3px #676767 solid;
+    width: 12px;
+    height: 8px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.popwind .midBtn {
+    border: 2px #666 solid;
+    border-top: 3px #676767 solid;
+    border-bottom: 3px #676767 solid;
+    width: 10px;
+    height: 5px;
+}
+
+.popwind .popbottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: 2px #39F solid;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.asbanner {
+    background: none;
+}
+
+.asbanner .content {
+    display: none;
+    border: 1px #06C solid;
+}
+
+.asbanner .easyshow {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    border: 2px #06F solid;
+    text-align: center;
+    border-radius: 4px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 32px;
+}
+
+.asbanner .minBtn {
+    text-align: center;
+    padding: 0 6px;
+    width: 60px;
+    height: 32px;
+    line-height: 32px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #f0f0f0;
+    border: 1px #06c solid;
+    border-bottom: none;
+    cursor: pointer;
+}

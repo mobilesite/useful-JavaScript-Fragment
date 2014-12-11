@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <style>
+        .tobeCopiedEle{
+            height: 300px;
+            border: 1px solid deeppink;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="tobeCopiedEleWrap">
+        <div class="tobeCopiedEle">
+            <p>子节点的内容</p>
+        </div>
+    </div>
+    <script>
+        (function(){
+            window.onload = function(){
+                var tobeCopiedEle = document.getElementById('tobeCopiedEleWrap').getElementsByTagName('div')[0];
+                var containInnerNodes;
+                cloneElement(tobeCopiedEle,true);
+
+                function cloneElement(el,containInnerNodes){
+                    /*
+                    * 复制元素
+                    * @el 被复制的目标节点
+                    * @containInnerNodes 是否将目标节点内部的子节点也一并复制
+                    * */
+                    var clonedEle = el.cloneNode(containInnerNodes);
+                    el.parentNode.appendChild(clonedEle);
+                    console.log('success');
+                }
+            }
+        })()
+    </script>
+</body>
+</html>

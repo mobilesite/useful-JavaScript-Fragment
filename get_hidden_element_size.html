@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .hiddenEle{
+            display: none;
+            border: 1px solid #999;
+            height: 500px;
+            background-color: rgba(255,0,0,.3);
+            -webkit-box-shadow: 10px 10px 5px red;
+            padding: 10px;
+        }
+        .otherEles{
+            height: 600px;
+            width: 300px;
+            border: 1px solid deeppink;
+        }
+    </style>
+</head>
+<body>
+    <div id="hiddenEleWrap">
+        <div class="hiddenEle"></div>
+    </div>
+    <div class="otherEles">
+        这是一个参照元素，用于观察获取隐藏元素的宽度和高度时，会不会导致这个参照元素的位置发生移动
+    </div>
+    <script>
+        (function(){
+            window.onload = function(){
+                var hiddenEle = document.getElementById('hiddenEleWrap').getElementsByTagName('div')[0];
+                var w = getHiddenElementSize(hiddenEle,'width');
+                var h = getHiddenElementSize(hiddenEle,'height');
+                var msg = document.createElement('p');
+                msg.innerHTML += w + ';' + h;
+                document.getElementsByTagName('body')[0].appendChild(msg);
+                function getHiddenElementSize(el,attr){
+                    /*
+                    * 获得display为none的元素尺寸
+                    * 先复制一个该隐藏元素，插入到与该隐藏元素同级的位置，然后设置元素为display:block，并同时把该元素visible设置为
+                    * 再根据它是否具有行间样式来获取其样式值
+                    * */
+
+                    var clonedEl = el.cloneNode(true);
+                    var result;
+                    el.parentNode.appendChild(clonedEl);
+//                    clonedEl.style.borderWidth = 0;
+                    clonedEl.style.visibility = 'hidden';
+                    if(attr === 'width'){
+                        clonedEl.style.height = 0;
+                        clonedEl.style.display = 'block';
+//                        result = clonedEl.offsetWidth + 'px';
+//                        result = clonedEl.clientWidth + 'px';
+                        result = clonedEl.scrollWidth + 'px';
+//                        if(clonedEl.style.width){
+//                            result = clonedEl.style.width;
+//                            getNextElement(el).remove();
+//                            return result;
+//                        }
+//                        result = getNotInlineStyle(clonedEl,'width');
+                        getNextElement(el).remove();
+                        return result;
+                    }
+                    else{
+                        clonedEl.style.width = 0;
+                        clonedEl.style.display = 'block';
+//                        result = clonedEl.offsetHeight + 'px';
+//                        result = clonedEl.clientHeight + 'px';
+                        result = clonedEl.scrollHeight + 'px';
+//                        if(clonedEl.style.height){
+//                            result = clonedEl.style.height;
+//                            getNextElement(el).remove();
+//                            return result;
+//                        }
+//                        result = getNotInlineStyle(clonedEl,'height');
+                        getNextElement(el).remove();
+                        return result;
+                    }
+                }
+                /*
+                function getNotInlineStyle(obj,attr){
+                    // 获取非行间样式
+                    if(obj.currentStyle){
+                        // for ie
+                        return obj.currentStyle[attr];
+                    }
+                    else{
+                        // for other browsers
+                        return getComputedStyle(obj,false)[attr];
+                    }
+                }
+                */
+                function getNextElement(node) {
+                    if(node.nextSibling.nodeType === 1) {
+                        //元素类型        节点类型
+                        //元素element        1
+                        //属性attr           2
+                        //文本text           3
+                        //注释comments       8
+                        //文档document       9
+                        return node.nextSibling;
+                    }
+                    if (node.nextSibling) {
+                        return getNextElement(node.nextSibling);
+                    }
+                    return null;
+                };
+            }
+        })()
+    </script>
+</body>
+</html>

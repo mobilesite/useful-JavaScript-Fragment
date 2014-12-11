@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        window.onload = function(){
+            (function(){
+                /**
+                 * window.location的那些属性各表示什么？
+                 * 这一堆属性确实不好记
+                 * 不过，你可以分段来记住它
+                 * href是包含整个URL的，其它的那几个属性都只是href的一部分
+                 * protocol是其中的协议部分，有http:、https:
+                 * host是主机部分，它包含了主机名(hostname属性)和端口号(port属性)
+                 * pathname属性是href中去除了protocol、host、hash和search这四个属性之外的部分
+                 * hash是一个值
+                 */
+                console.log('window.location.href: ' + window.location.href);
+                console.log('window.location.protocol: ' + window.location.protocol);
+                console.log('window.location.host: ' + window.location.host);
+                console.log('window.location.hostname: ' + window.location.hostname);
+                console.log('window.location.port: ' + window.location.port);
+                console.log('window.location.pathname: ' + window.location.pathname);
+                console.log('window.location.hash: ' + window.location.hash);
+                console.log('window.location.search: ' + window.location.search);
+            })()
+        }
+    </script>
+</body>
+</html>
