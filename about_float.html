@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <style>
+        *{padding:0;margin:0;}
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
+        ul{
+            border: 1px solid #bebebe;
+        }
+        li{
+            list-style: none;
+            float: left;
+            width: 50px;
+            height: 50px;
+            border: 1px solid deeppink;
+        }
+    </style>
+</head>
+<body>
+    <h1>演示浮动与清除浮动的影响</h1>
+    <h2>情形一：clear:left清除左边的浮动</h2>
+    <ul>
+        <li></li>
+        <div style="clear: left; "></div>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div style="clear: left"></div>
+
+    <h2>情形二： 清除浮动的元素自身带有浮动，比如这里的li，则是无法清除彻底的，因为这个元素自身的浮动未能被清除。所以，用于清除浮动的元素自身不能带有浮动</h2>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li style="clear: left; "></li>
+    </ul>
+
+    <div style="clear: left"></div>
+
+    <h2>情形三：用不带浮动的元素清除浮动</h2>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <div style="clear: left; "></div>
+    </ul>
+
+    <h2>情形四：通过让元素浮动来实现对子元素的包裹</h2>
+    <ul style="float: left">
+        <li></li>
+        <li></li>
+        <li></li>
+        <div style="clear: left; "></div>
+    </ul>
+    <div style="clear: left"></div>
+
+    <h2>情形五：通过让元素绝对定位来实现对子元素的包裹</h2>
+    <ul style="position: absolute">
+        <li></li>
+        <li></li>
+        <li></li>
+        <div style="clear: left; "></div>
+    </ul>
+</body>
+</html>

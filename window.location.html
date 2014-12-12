@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable = no, maximum-scale = 1.0, minimum-scale= 1.0">
     <title></title>
+    <style>
+        *{padding:0;margin:0;}
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
+    </style>
 </head>
 <body>
+    <h1>让你记住window.location的那些属性
+        <br/>下面以输入http://localhost:63342/dev/tools/useful-JavaScript-Fragment/window.location.html/?id=aaa/#bbb为例</h1>
+    <h2>
+        输出结果如下:<br/>
+        window.location.href: http://localhost:63342/dev/tools/useful-JavaScript-Fragment/window.location.html/?id=aaa/#bbb<br/>
+        window.location.protocol: http:<br/>
+        window.location.host: localhost:63342<br/>
+        window.location.hostname: localhost<br/>
+        window.location.port: 63342<br/>
+        window.location.pathname: /dev/tools/useful-JavaScript-Fragment/window.location.html/<br/>
+        window.location.hash: #bbb<br/>
+        window.location.search: ?id=aaa/<br/>
+    </h2>
     <script>
         window.onload = function(){
             (function(){
@@ -18,13 +38,13 @@
                  * hash是一个值
                  */
                 console.log('window.location.href: ' + window.location.href);
-                console.log('window.location.protocol: ' + window.location.protocol);
+                console.log('window.location.protocol: ' + window.location.protocol );
                 console.log('window.location.host: ' + window.location.host);
                 console.log('window.location.hostname: ' + window.location.hostname);
                 console.log('window.location.port: ' + window.location.port);
                 console.log('window.location.pathname: ' + window.location.pathname);
-                console.log('window.location.hash: ' + window.location.hash);
-                console.log('window.location.search: ' + window.location.search);
+                console.log('window.location.hash: ' + window.location.hash );
+                console.log('window.location.search: ' + window.location.search );
             })()
         }
     </script>

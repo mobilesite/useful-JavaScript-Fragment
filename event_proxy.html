@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, user-scalable= no, maximum-scale = 1.0, minimum-scale = 1.0">
+    <title></title>
+    <style>
+        *{padding:0;margin:0;}
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th{
+            font-weight: bold;
+        }
+        td,th{
+            height: 30px;
+            line-height: 30px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid lightpink;
+            width: 16.66666%;
+        }
+        td input,th input{
+            width: 80%;
+            height: 90%;
+            padding: 3px;
+            font: 14px normal arial, "microsoft yahei", helvetica, sans-serif;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>事件代理——用事件代理实现一个可编辑的表格。<br/>如果不做事件代理，就需要给每个td、th都绑定一个点击处理方法，这样的话在td、th非常多的情况下容易导致内存泄露，性能极差。所以将处理方法绑定到其共同的祖先元素table上，这样只需要绑定一次就够了。但是由于事件的冒泡，会让table元素同样监听到td、th的点击事件，并可以追踪到事件是从哪个元素冒泡过来的，从而可以准确地进行处理。</h1>
+    <table id="proxyEle">
+        <thead>
+            <tr>
+                <th>标题</th>
+                <th>标题</th>
+                <th>标题</th>
+                <th>标题</th>
+                <th>标题</th>
+                <th>标题</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+                <td>111</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    (function(){
+        window.onload = function(){
+            var txt;
+            bindEvent($('proxyEle'),'click',function(e){
+                editCell(e)
+            });
+
+            function getEventTarget(e){
+                var e = e || window.event;
+                return e.target || e.srcElement;
+            }
+
+            function editCell(e){
+                var targ = getEventTarget(e);
+                if(targ.tagName.toLowerCase() === 'td' || 'th'){
+                    var editBox = $('editBox');
+                    if(editBox){
+                        editBox.blur();
+                        editBox.remove();
+                    }
+                    txt = targ.innerHTML;
+                    targ.innerHTML = '<input id="editBox" type="text" value="' + txt +'">';
+                    var newEditBox = $('editBox');
+                    newEditBox.focus = function(){
+                        this.select();
+                    }
+                    newEditBox.click = function(e){
+                        this.select();
+                    }
+                    newEditBox.focus();
+                    newEditBox.onblur = function(){
+                        if(newEditBox.value){
+                            newEditBox.parentNode.innerHTML = newEditBox.value;
+                        }
+                        else{
+                            newEditBox.parentNode.innerHTML = txt;
+                        }
+                        newEditBox.remove;
+                    }
+                }
+            }
+            function $(id){
+                return document.getElementById(id);
+            }
+            function bindEvent(el,type,fn){
+                if(el.attachEvent){
+                    el.attachEvent(on + type, fn);
+                }
+                else if(el.addEventListener){
+                    el.addEventListener(type, fn, false);
+                }
+            }
+        }
+
+    })()
+</script>
+</html>

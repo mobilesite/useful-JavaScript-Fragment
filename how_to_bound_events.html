@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <style>
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
+        .tobeCopiedEle{
+            height: 300px;
+            border: 1px solid deeppink;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>怎样绑定click？为什么有的时候要带括号，有的时候又没有括号？</h1>
+    <h2>HTML 代码中的input onclick="fun()"与JavaScript中的document.getElementById('xxx') = func 有什么区别？为什么一个带括号，一个不带？ 前一种方式的fun()必须定义在window.onload = function(){}之外才能被调到，在执行HTML代码时候，input onclick="fun()"里面的fun()是不被执行的，只有在input发生点击的时候才会被执行。而后者document.getElementById('xxx') = func 是在不带括号的时候才表示把该方法附加到元素的点击事件上，点击后会执行该事件。如果写成document.getElementById('xxx') = fun()的形式，则在JavaScript载入完后就会执行fun()里面的内容，然后把执行的结果（一般是一个一个对象）赋给document.getElementById('xxx')，比如，如果fun()执行的结果是undefined，那么document.getElementById('xxx')=undefined。这个赋值的过程会在点击该按钮之前就发生。所以document.getElementById('xxx') = fun这种方式是不能带括号的，因此也就不可以在fun上传入参数。那如果要传入参数怎么办呢？就需要写成如下的形式：
+        document.getElementById('xxx') = function(){
+            fun(p1,p2);
+        }
+        即在外面套一个function(){}
+    </h2>
+    <div id="tobeCopiedEleWrap">
+        <div class="tobeCopiedEle">
+            <p>子节点的内容</p>
+        </div>
+    </div>
+    <input type="button" onclick="myMsg('我是行内的onlick弹出的信息哦~')" value="使用HTML的onclick=func() Clone Element">
+    <input type="button" id="cloneBtn2"  value="使用document.getElementById('xxx') = function(){func(p1,p2);} Clone Element，可以传参数">
+    <input type="button" id="cloneBtn3"  value="使用document.getElementById('xxx') = function(){func(p1,p2);} Clone Element，可以传参数">
+    <input type="button" id="cloneBtn1"  value="使用document.getElementById('xxx') = func Clone Element">
+    <h2>addEventListener、attachEvent和onclick 区别在哪？用于add有的时候是onclick,有的时候又是click,在什么场合下选择使用？
+        <p>
+            onclick = 方式绑定的事件，后面绑定的事件会覆盖前面的，即如果onclick = fun1; onclick = fun2; onclick = fun3; 那么执行的结果是看到fun3的执行结果，前面两个则被覆盖掉了。
+            adEventListener、attachEvent都是不会对前面绑定的事件产生覆盖的，而是全部都会监听。其中window.attachEvent是ie浏览器特有的，它只有两个参数，绑定时候用的是click；而addEventListener是除ie外的其它浏览器所支持的，它有三个参数，绑定时用的是onclick。
+        </p>
+        </h2>
+
+    <script>
+        window.onload = function(){
+            var tobeCopiedEle = document.getElementById('tobeCopiedEleWrap').getElementsByTagName('div')[0];
+            var containInnerNodes;
+            document.getElementById('cloneBtn2').onclick = function(){
+                cloneElement(tobeCopiedEle,true);
+            };
+            var cloneBtn3 = document.getElementById('cloneBtn3');
+            if(cloneBtn3.addEventListener){
+                // for other browsers
+                cloneBtn3.addEventListener('click',function(){
+                    cloneElement(tobeCopiedEle,true);
+                },false)
+            }
+            else if(window.attachEvent){
+                // for ie
+                window.attachEvent('onclick',function(){
+                    cloneElement(tobeCopiedEle,true);
+                })
+            }
+            document.getElementById('cloneBtn1').onclick = fcloneElement(tobeCopiedEle,true);//这一行是错误的写法，请查看其报错
+
+
+            function cloneElement(el,containInnerNodes){
+                /*
+                * 复制元素
+                * @el 被复制的目标节点
+                * @containInnerNodes 是否将目标节点内部的子节点也一并复制
+                * */
+                var clonedEle = el.cloneNode(containInnerNodes);
+                el.parentNode.appendChild(clonedEle);
+                console.log('success');
+                return false;
+            }
+        }
+
+        function myMsg(msg){
+            alert(msg);
+        }
+    </script>
+</body>
+</html>

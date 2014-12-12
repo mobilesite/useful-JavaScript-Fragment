@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <title></title>
     <style>
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
         .tobeCopiedEle{
             height: 300px;
             border: 1px solid deeppink;
@@ -14,17 +16,21 @@
     </style>
 </head>
 <body>
+    <h1>自定义克隆元素的方法</h1>
     <div id="tobeCopiedEleWrap">
         <div class="tobeCopiedEle">
             <p>子节点的内容</p>
         </div>
     </div>
+    <button id="cloneBtn">Clone Element</button>
     <script>
         (function(){
             window.onload = function(){
                 var tobeCopiedEle = document.getElementById('tobeCopiedEleWrap').getElementsByTagName('div')[0];
                 var containInnerNodes;
-                cloneElement(tobeCopiedEle,true);
+                document.getElementById('cloneBtn').onclick = function(){
+                    cloneElement(tobeCopiedEle,true);
+                };
 
                 function cloneElement(el,containInnerNodes){
                     /*
@@ -35,6 +41,7 @@
                     var clonedEle = el.cloneNode(containInnerNodes);
                     el.parentNode.appendChild(clonedEle);
                     console.log('success');
+                    return false;
                 }
             }
         })()
