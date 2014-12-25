@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .text-center{
+            text-align: center;
+        }
+        .spot1 {
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            background: red;
+            width: 10px;
+            height: 10px;
+            -webkit-border-radius: 50%;
+            -webkit-transform-origin: 0 200px;
+            -webkit-animation: spot-move-in-circle1 10s linear infinite alternate;
+        }
+
+        .spot2 {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            background: #feca00;
+            width: 5px;
+            height: 5px;
+            -webkit-border-radius: 50%;
+            -webkit-transform-origin: 0 100px;
+            -webkit-animation: spot-move-in-circle2 8s linear infinite alternate;
+        }
+        .arrow{
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            color: #333;
+            font-weight: bold;
+            -webkit-animation: arrow-move 0.6s ease-out infinite alternate;
+        }
+        .zoom-out-wrap{
+            margin-top: 300px;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: relative;
+            border: 1px solid #38ade6;
+        }
+        .zoom-out1,.zoom-out2,.zoom-out3{
+            position: absolute;
+            border: 1px solid #38ade6;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #38ade6;
+        }
+        .zoom-out1{
+            -webkit-animation: zoom-out 1s infinite;
+        }
+        .zoom-out2{
+            -webkit-animation: zoom-out 1s .3s infinite;
+            /*background-color: #38ade6;*/
+        }
+        .zoom-out3{
+            -webkit-animation: zoom-out3 1.5s .6s infinite;
+            /*background-color: #feca00;*/
+        }
+        .music{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            color: #999;
+            right: 20px;
+            top: 20px;
+            border: 1px solid #999;
+            -webkit-border-radius: 50%;
+        }
+        .rotate360{
+            -webkit-animation: rotate360 3s linear infinite;
+        }
+        .text-animation1,.text-animation2,.text-animation3{
+            position: absolute;
+            left: 50%;
+            margin-left: -60px;
+            font-size: 20px;
+            color: #333;
+            font-family: arial, "microsoft yahei", helvetica, sans-serif;
+        }
+        .text-animation1{
+            top: 100px;
+            -webkit-animation: text-animation 1.2s ease-in;
+        }
+        .text-animation2{
+            top: 140px;
+            -webkit-animation: text-animation 1.2s .3s ease-in;
+        }
+        .text-animation3{
+            top: 180px;
+            -webkit-animation: text-animation 1.2s .6s ease-in;
+        }
+
+        @-webkit-keyframes spot-move-in-circle1 {
+            0% {
+                -webkit-transform: rotate(-90deg) translateZ(0);
+            }
+            100% {
+                -webkit-transform: rotate(90deg) translateZ(0);
+            }
+        }
+
+        @-webkit-keyframes spot-move-in-circle2 {
+            0% {
+                -webkit-transform: rotate(90deg) translateZ(0);
+            }
+            100% {
+                -webkit-transform: rotate(-90deg) translateZ(0);
+            }
+        }
+
+        @-webkit-keyframes arrow-move{
+            0% {
+                -webkit-transform: translateY(0)  rotate(90deg);
+            }
+            100% {
+                -webkit-transform: translateY(6px)  rotate(90deg);
+            }
+        }
+
+        @-webkit-keyframes rotate360 {
+            0% {
+                -webkit-transform: rotate(0deg) translateZ(0);
+            }
+            100% {
+                -webkit-transform: rotate(360deg) translateZ(0);
+            }
+        }
+
+        @-webkit-keyframes text-animation {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateY(1200px) scale(0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0) scale(1);
+            }
+        }
+
+        @-webkit-keyframes zoom-out {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateZ(0) scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translateZ(0) scale(3);
+            }
+        }
+
+        @-webkit-keyframes zoom-out3 {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateZ(0) scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translateZ(0) scale(5);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="spot1"></div>
+<div class="spot2"></div>
+<div class="arrow">&gt;</div>
+<div class="music rotate360">.</div>
+<p class="p1 text-animation1">CSS3动画效果</p>
+<p class="p2 text-animation2">CSS3动画效果</p>
+<p class="p3 text-animation3">CSS3动画效果</p>
+<div class="text-center">
+    <div class="zoom-out-wrap">
+        <div class="zoom-out1"></div>
+        <div class="zoom-out2"></div>
+        <div class="zoom-out3"></div>
+    </div>
+</div>
+</body>
+</html>

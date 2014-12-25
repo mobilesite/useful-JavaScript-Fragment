@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale:1.0 ">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0}
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
+        li{list-style: none}
+        .fix:after{content:'';display: table;clear: both;}
+        .fix{*zoom:1;}
+        .fluid0 li{
+             float: left;
+             width: 100px;
+             border: 1px solid deeppink;
+         }
+
+        .fluid2 li{
+            border: 1px solid deeppink;
+        }
+        .fluid2 li:first-child{
+            float: left;
+            width: 100px;
+        }
+        .fluid2 li.li1{
+            margin-left:102px;
+        }
+
+        .fluid3 li{
+            border: 1px solid deeppink;
+        }
+        .fluid3 li:first-child{
+            float: right;
+            width: 100px;
+        }
+        .fluid3 li.li1{
+            margin-right:102px;
+        }
+
+        .fluid4 li:last-child{
+            float: right;
+            width: 100px;
+            margin-left: -102px;
+            border: 1px solid deeppink;
+        }
+        .fluid4 li.li1{
+            float:left;
+            width: 100%;
+        }
+        .fluid4 .li1_content{
+            margin-right:102px;
+            border: 1px solid deeppink;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!--<h1>用float实现流动布局（砖墙布局）</h1>-->
+    <!--<h2>传统的方式：统一float:left</h2>-->
+    <ul class="fluid0 fix">
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+        <li>666</li>
+    </ul>
+
+    <!--<h2>一种新的方式</h2>-->
+    <ul class="fluid1">
+        <li>111<br>111</li>
+        <li class="li1">222<br/>222<br>2222<br></li>
+    </ul>
+
+    <!--<h2>又一种新的方式</h2>-->
+    <ul class="fluid2">
+        <li>111<br>111</li>
+        <li class="li1">222<br/>222<br>2222<br></li>
+    </ul>
+
+    <!--<h3>下面这种方式的问题是，标签的位置和实际上显示的位置不一样。标签位置li1在另一个li的右边，实际上显示的位置是在另一个li的左边</h3>-->
+    <ul class="fluid3">
+        <li>111<br>111</li>
+        <li class="li1">222<br/>222<br>2222<br></li>
+    </ul>
+
+    <!--<h3>下面我们对上述问题进行处理，以解决上述问题</h3>-->
+
+    <ul class="fluid4">
+        <li class="li1">
+            <div class="li1_content">
+                222<br/>222<br>2222<br>
+            </div>
+        </li>
+        <li>111<br>111</li>
+    </ul>
+
+</body>
+</html>

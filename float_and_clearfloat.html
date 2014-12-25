@@ -60,11 +60,25 @@
     <div style="clear: left"></div>
 
     <h2>情形五：通过让元素绝对定位来实现对子元素的包裹</h2>
-    <ul style="position: absolute">
+    <ul style="position: absolute; ">
         <li></li>
         <li></li>
         <li></li>
-        <div style="clear: left; "></div>
     </ul>
+
+    <p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        比较常见的清除浮动的方法是：
+        .clearfix:after{content:'';display:block;height:0;overflow:hidden;clear:both;}
+        .clearfix{*zoom:1;}//for ie6,因为ie6不支持:after伪元素
+        另一种比较简洁的方法是：
+        .fix:after{content:'';display:table;clear:both;}
+        .fix{*zoom:1;}//for ie6,因为ie6不支持:after伪元素
+        改用fix而不是clearfix命名的原因是这个class名在HTML代码中出现的频率非常高，能减少代码的拼写
+    </p>
 </body>
 </html>

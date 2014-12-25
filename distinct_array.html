@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        (function(){
+            window.onload = function(){
+                var arr =['a','b','c','aa','bb','cc','a','b','c',11,22,'kkk',11,22];
+                var result = distinctArray(arr);
+                function distinctArray(arr){
+                    /*
+                    *  数组去重
+                    *  第一种方法
+                    * */
+                    var tempArr = [],
+                         flag;
+                    tempArr.push(arr[0]);
+                    for(var i=1;i<arr.length;i++){
+                        flag = false;
+                        for(var j=0;j<tempArr.length;j++){
+                            if((arr[i] === tempArr[j])){
+                                flag = true;
+                            };
+                        }
+                        if(!flag){
+                            tempArr.push(arr[i]);
+                        }
+                    }
+                    return tempArr;
+                }
+                for(var k =0; k<result.length;k++){
+                    console.log(result[k]);
+                }
+
+                /*
+                * 数组去重的第二种方法
+                * */
+                Array.prototype.unique = function(){
+                    var newArr = [];
+                    for(var l=0;l<this.length;l++){
+                        if(newArr.indexOf(this[l])==-1){
+                            newArr.push(this[l]);
+                        }
+                    }
+                    return newArr;
+                }
+                var rst =arr.unique();
+                for(var m=0;m<rst.length;m++){
+                    console.log(rst[m]);
+                }
+             }
+        })()
+    </script>
+</body>
+</html>

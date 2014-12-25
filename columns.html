@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        h1,h2{font: 20px normal arial, "microsoft yahei", helvetica, sans-serif; color: deeppink;line-height: 30px;padding:10px;text-align: center;}
+        h2{font-size: 16px;line-height: 24px;color: #999; text-align: left}
+        .fix:after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .fix{
+            zoom:1;
+        }
+        .column_left1{
+            float:left;
+            width: 200px;
+            overflow: hidden;
+            border: 1px solid deeppink;
+        }
+        .column_right1{
+            margin-left: 202px;
+            padding-left:10px;
+            border: 1px solid #0000ff;
+        }
+
+        .column_left11{
+            float:left;
+            width: 200px;
+            overflow: hidden;
+            border: 1px solid deeppink;
+        }
+        .column_right11{
+            display: table-cell;
+            zoom:1;
+            border: 1px solid #0000ff;
+        }
+
+        .column_wrap2{
+
+        }
+        .column_left2{
+            width: 100%;
+            float: left;
+        }
+        .column_left_content{
+            margin-right: 202px;
+            border: 1px solid #0000ff;
+        }
+        .column_right2{
+            float: left;
+            width: 200px;
+            margin-left: -202px;
+            border: 1px solid deeppink;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>用css实现分栏布局</h1>
+        <h2>左侧一列固定宽度的情况：优点，两栏互不干涉，各自伸缩高度，column_wrap1的高度以这两栏中高度更高的那一栏为准。实现方法为：<br>
+            给左侧一栏进行左浮动，并设置宽度。给右侧一栏设置左边距，左边距的值等于左侧一栏元素的magin+padding+border+width的值。最后非常关键一步是给父元素加上fix样式，清除浮动，以达到让column_wrap包裹最高的那列元素的目的。
+        </h2>
+        <div class="column_wrap1 fix">
+            <div class="column_left1">11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br></div>
+            <div class="column_right1">11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11</div>
+        </div>
+
+        <h2>左侧一列固定宽度的情况：优点，两栏互不干涉，各自伸缩高度，column_wrap1的高度以这两栏中高度更高的那一栏为准。缺点是右侧一栏的宽度由内容的宽度来决定。实现方法为：<br>
+            给左侧一栏进行左浮动，并设置宽度。给右侧一栏设置display:table-cell;zoom:1。最后非常关键一步是给父元素加上fix样式，清除浮动，以达到让column_wrap包裹最高的那列元素的目的。
+        </h2>
+        <div class="column_wrap11 fix">
+            <div class="column_left11">11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br></div>
+            <div class="column_right11">11111111111111111111111111111111111111111111<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>11</div>
+        </div>
+
+        <h2>右侧一列固定宽度的情况：两栏互不干涉，各自伸缩高度;column_left设置绝对定位，并写上固定宽度。 column_wrap添加fix样式，column_left设置float:left，width:100%; column_left_content设置margin-right:200px，column_right设置float:left;width:200px;margin-left:-200px;</h2>
+        <div class="column_wrap2 fix">
+            <div class="column_left2">
+                <div class="column_left_content">
+                    11<br>22<br>11<br>22<br>11<br>22
+                </div>
+            </div>
+            <div class="column_right2">
+                11<br>22<br>11<br>22<br>11<br>22<br>11<br>22<br>22<br>11<br>22<br>11<br>22<br>22<br>11<br>22
+            </div>
+        </div>
+    </div>
+</body>
+</html>
