@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="base.js"></script>
+</head>
+<body>
+    <div id="idtest">123</div>
+    <span>abc</span>
+    <span>def</span>
+<script>
+    window.onload = function(){
+        console.log($().idGet('idtest').innerHTML);
+        console.log($().tagGet('span')[0].innerHTML);
+        $().tagGet('span')[1].hide();
+    }
+</script>
+</body>
+</html>

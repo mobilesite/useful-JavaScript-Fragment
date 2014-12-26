@@ -77,10 +77,17 @@
             height: 20px;
             padding: 5px;
             color: #999;
-            right: 20px;
-            top: 20px;
+            right: 31px;
+            top: 31px;
             border: 1px solid #999;
             -webkit-border-radius: 50%;
+        }
+        .music-in{
+            border: 1px solid #38ade6;
+            margin-left: 25px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
         }
         .rotate360{
             -webkit-animation: rotate360 3s linear infinite;
@@ -104,6 +111,56 @@
         .text-animation3{
             top: 180px;
             -webkit-animation: text-animation 1.2s .6s ease-in;
+        }
+
+        .progress-button{
+            position: relative;
+            display: table-cell;
+            width: 100px;
+            height: 100px;
+            /*-webkit-transform:scale(.7);*/
+            border-radius: 50%;
+            background: #eee;
+        }
+        .progress-button-progress1,.progress-button-progress2{
+            position: absolute;
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .progress-button-progress1{
+            background-color: #38ade6;
+            clip: rect(0px 100px 100px 50px);
+            clip: rect(0px,100px,100px,50px);
+            -webkit-animation: progress-rotation1 2s linear;
+            /*-webkit-transform-origin: 100px 200px; 改变旋转点 挖掘机效果*/
+        }
+        .progress-button-progress2{
+            background-color: #38ade6;
+            clip: rect(0px 50px 100px 0);
+            clip: rect(0px,50px,100px,0);
+            -webkit-animation: progress-rotation1 2s 2s linear;
+        }
+        .progress-button-inner{
+            position: absolute;
+            background-color: #fff;
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin-left: 2px;
+            margin-top: 2px;
+        }
+        .progress-button-mask1,.progress-button-mask2{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .progress-button-mask1{
+            clip: rect(0px,100px,100px,50px);
+        }
+        .progress-button-mask2{
+            clip: rect(0px,50px,100px,0px);
         }
 
         @-webkit-keyframes spot-move-in-circle1 {
@@ -174,22 +231,117 @@
                 -webkit-transform: translateZ(0) scale(5);
             }
         }
+
+        @-webkit-keyframes progress-rotation1{
+            0% {
+                opacity: 0;
+                -webkit-transform:rotate(-180deg);
+            }
+            1% {
+                opacity: 1;
+                -webkit-transform:rotate(-180deg);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform:rotate(0deg);
+            }
+        }
     </style>
 </head>
 <body>
-<div class="spot1"></div>
-<div class="spot2"></div>
-<div class="arrow">&gt;</div>
-<div class="music rotate360">.</div>
-<p class="p1 text-animation1">CSS3动画效果</p>
-<p class="p2 text-animation2">CSS3动画效果</p>
-<p class="p3 text-animation3">CSS3动画效果</p>
-<div class="text-center">
-    <div class="zoom-out-wrap">
-        <div class="zoom-out1"></div>
-        <div class="zoom-out2"></div>
-        <div class="zoom-out3"></div>
+<div class="page">
+    <div class="spot1"></div>
+    <div class="spot2"></div>
+    <div class="arrow">&gt;</div>
+    <p class="p1 text-animation1">CSS3动画效果</p>
+    <p class="p2 text-animation2">CSS3动画效果</p>
+    <p class="p3 text-animation3">CSS3动画效果</p>
+    <div class="music rotate360">.
+        <!--<div class="music-in"></div>-->
     </div>
+    <div class="progress-button">
+        <div class="progress-button-mask1"><div class="progress-button-progress1"></div></div>
+        <div class="progress-button-mask2"><div  class="progress-button-progress2"></div></div>
+        <div class="progress-button-inner">
+            <!--<div class="progress-button" style="-webkit-transform: scale(.75) rotate(90deg);">-->
+                <!--<div class="progress-button-mask1"><div class="progress-button-progress1"></div></div>-->
+                <!--<div class="progress-button-mask2"><div  class="progress-button-progress2"></div></div>-->
+                <!--<div class="progress-button-inner">-->
+                    <!--<div class="progress-button" style="-webkit-transform: scale(.5) rotate(180deg);">-->
+                        <!--<div class="progress-button-mask1"><div class="progress-button-progress1"></div></div>-->
+                        <!--<div class="progress-button-mask2"><div  class="progress-button-progress2"></div></div>-->
+                        <!--<div class="progress-button-inner"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="text-center">
+        <div class="zoom-out-wrap">
+            <div class="zoom-out1"></div>
+            <div class="zoom-out2"></div>
+            <div class="zoom-out3"></div>
+        </div>
+    </div>
+
+
+
 </div>
+    <script>
+        var touchFunc = function(obj,type,func) {
+            //滑动范围在5x5内则做点击处理，s是开始，e是结束
+            var config = {x:5,y:5,sx:0,sy:0,ex:0,ey:0};
+            var sTime = 0, eTime = 0;
+            type = type.toLowerCase();
+
+            obj.addEventListener("touchstart",function(){
+                sTime = new Date().getTime();
+                config.sx = event.targetTouches[0].pageX;
+                config.sy = event.targetTouches[0].pageY;
+                config.ex = config.sx;
+                config.ey = config.sy;
+                if(type.indexOf("start") != -1) func();
+            }, false);
+
+            obj.addEventListener("touchmove",function() {
+                event.preventDefault();//阻止触摸时浏览器的缩放、滚动条滚动
+                config.ex = event.targetTouches[0].pageX;
+                config.ey = event.targetTouches[0].pageY;
+                if(type.indexOf("move")!=-1) func();
+            }, false);
+
+            obj.addEventListener("touchend",function() {
+                var changeX = config.sx - config.ex;
+                var changeY = config.sy - config.ey;
+                if(Math.abs(changeX)>Math.abs(changeY)&&Math.abs(changeY)>config.y) {
+                    //左右事件
+                    if(changeX > 0) {
+                        if(type.indexOf("left")!=-1) func();
+                    }else{
+                        if(type.indexOf("right")!=-1) func();
+                    }
+                }
+                else if(Math.abs(changeY)>Math.abs(changeX)&&Math.abs(changeX)>config.x){
+                    //上下事件
+                    if(changeY > 0) {
+                        if(type.indexOf("top")!=-1) func();
+                    }else{
+                        if(type.indexOf("down")!=-1) func();
+                    }
+                }
+                else if(Math.abs(changeX)<config.x && Math.abs(changeY)<config.y){
+                    eTime = new Date().getTime();
+                    //点击事件，此处根据时间差细分下
+                    if((eTime - sTime) > 300) {
+                        if(type.indexOf("long")!=-1) func(); //长按
+                    }
+                    else {
+                        if(type.indexOf("click")!=-1) func(); //当点击处理
+                    }
+                }
+                if(type.indexOf("end")!=-1) func();
+            }, false);
+        };
+    </script>
 </body>
 </html>
