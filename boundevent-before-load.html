@@ -2,11 +2,22 @@
 <html>
 <head>
     <title></title>
+    <style>
+        #newDiv{
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
     <script>
         window.onload = function(){
-            
+            var newDiv = document.createElement('div');
+            newDiv.setAttribute('id','newDiv');
+            document.getElementsByTagName('body')[0].appendChild(newDiv);
+            document.getElementById('newDiv').addEventListener('click',function(){
+                alert('123');
+            })
         }
     </script>
 </body>
