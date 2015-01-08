@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title></title>
+    <script src="js/json2.js"></script>
+</head>
+<body>
+<script>
+    var oBook = {
+        title: 'js高级编程',
+        publisher: '人民邮电出版社',
+        year: 2010,
+        author:['aron','john'],
+        edition:2,
+        colorful:false,
+        releaseDate: new Date(2011,11,1)
+//        toJSON: function(){
+//            return this.author;
+//        }
+    }
+    var sBookJsonTxt = JSON.stringify(oBook,function(key,value){
+        switch(key){
+            case 'title':
+                return undefined;
+            case 'publisher':
+                return '清华大学出版社';
+            case 'year':
+                return 2000;
+            case 'author':
+                return value.join(',');
+            default:
+                return value;
+        }
+    },'\t');
+    alert(sBookJsonTxt);
+
+    var oBookCopy = JSON.parse(sBookJsonTxt,function(key,value){
+        if(key=='releaseDate'){
+            return new Date(value);
+        }
+        else{
+            return value;
+        }
+    });
+
+    alert(oBookCopy.releaseDate.getFullYear().toString()+','+oBookCopy.releaseDate.getMonth().toString()+','+oBookCopy.releaseDate.getDate().toString());
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+    "name":"kevin",
+    "age":20,
+    "friends":["jack","tom","kate","注意：json里面，数组中的字符串也必须是双引号，如果用单引号会出错"],
+    "male":false
+}

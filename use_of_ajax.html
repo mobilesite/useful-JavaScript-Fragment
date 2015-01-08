@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title></title>
+    <script src="js/json2.js"></script>
+</head>
+<body>
+    <div id="txt1">
+    </div>
+    <div id="txt2">
+    </div>
+    <form id="user-info">
+        <label for="name">Name:</label> <input id="name" type="text" name="user_name">
+        <label for="age">Age:</label><input id="age" type="text" name="user_age">
+    </form>
+    <script>
+        function createXHR(){
+            if(typeof XMLHttpRequest != 'undefined'){
+                //ie7+
+                return new XMLHttpRequest();
+            }
+            else if(typeof AxtiveXObject){
+                //for ie6
+                if(arguments.callee.activeXString != 'string'){
+                    var versions=['MSXML2.XMLHttp.6.0','MSXML2.XMLHttp.3.0','MSXML2.XMLHttp'],
+                            i,len;
+                    for(i=0,len=versions.length;i<len;i++){
+                        try{
+                            new ActiveXObject(versions[i]);
+                            arguments.callee.activeXString = versions[i];
+                            break;
+                        }
+                        catch (ex){
+                            //跳过
+                        }
+                    }
+                }
+                return new ActiveXObject(arguments.callee.activeXString);
+            }
+            else{
+                throw new Error('No XHR object available.');
+            }
+        }
+
+        function ajaxGet(){
+            var xhr = createXHR();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    //readyState属性有0,1,2,3,4这五个取值，0表示未初始化，还没有open();1表示启动，已经条用open(),但还没有send();2表示已经调用send(),但尚未收到响应;3表示已经接收到部分响应数据；4表示已经接收到全部响应数据，并且可以在客户端使用了。
+                    if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+                        alert(xhr.responseText);
+                        var oResult = JSON.parse(xhr.responseText);
+                        g('txt1').innerHTML = oResult.age;
+                        g('txt2').innerHTML = oResult.name;
+
+//                    var myHeader = xhr.getResponseHeader('myHeader');
+                        var allHeaders = xhr.getAllResponseHeaders();
+//                    alert(myHeader);
+                        alert(allHeaders);
+                    }
+                    else{
+                        alert('Request was unsuccessful:' + xhr.status);
+                    }
+                }
+            }//注意：必须在调用open之前指定onreadystatechange事件才能保证代码的兼容性
+
+            xhr.open('get','testajax.json',true);//true表示以异步的方式发送请求
+            xhr.send(null);
+        }
+
+
+        function submitData(){
+            var xhr = createXHR();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    //readyState属性有0,1,2,3,4这五个取值，0表示未初始化，还没有open();1表示启动，已经条用open(),但还没有send();2表示已经调用send(),但尚未收到响应;3表示已经接收到部分响应数据；4表示已经接收到全部响应数据，并且可以在客户端使用了。
+                    if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+                        alert(xhr.responseText);
+
+                        var allHeaders = xhr.getAllResponseHeaders();
+                        alert(allHeaders);
+                    }
+                    else{
+                        alert('Request was unsuccessful:' + xhr.status);
+                    }
+                }
+            }//注意：必须在调用open之前指定onreadystatechange事件才能保证代码的兼容性
+
+            xhr.open('post','testajax.php',true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');//设置请求头部信息需在open方法调用之后且send方法调用之前，否则不会生效
+            var myForm = g('user-info');
+            xhr.send(serialize(myForm));
+        }
+
+        var userInputs = document.getElementsByTagName('input');
+        for(var i= 0,len=userInputs.length;i<len;i++){
+            userInputs[i].onchange = function(){
+                submitData();
+            }
+        }
+
+
+
+        /*
+        var url = 'testajax.php';
+        addURLParam(url,'name','zhangshan');
+        addURLParam(url,'age',20);
+        xhr.open('get',url,false);
+        xhr.send(null);
+        */
+
+        function g(id){
+            return document.getElementById(id);
+        }
+
+        function addURLParam(url, name, value){
+            url += (url.indexOf('?')==-1?'?':'&');
+            url += encodeURIComponent(name) + '=' + encodeURIComponent(value);
+            return url;
+        }
+    </script>
+</body>
+</html>
