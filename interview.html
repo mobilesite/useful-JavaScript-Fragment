@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*
+     interviews
+     */
+
+    //NO.1 结果undefined
+//    if (!("a" in window)) {
+//        var a = 1;
+//    }
+//    alert(a);
+
+    //NO.2  结果1
+//    var a = 1,
+//        b = function a(x) {
+//            x && a(--x);
+//        };
+//    alert(a);
+
+    //NO.3 结果是
+    // function a(x) {
+    //          return x * 2;
+    //      }
+
+//    function a(x) {
+//        return x * 2;
+//    }
+//    var a ;
+//    alert(a);
+
+    //NO.4 结果10
+//    function b(x, y, a) {
+//        arguments[2] = 10;
+//        alert(a);
+//    }
+//    b(1, 2, 3);
+
+    //NO.5 结果window对象
+    function a() {
+        alert(this);
+    }
+    a.call(null);
+
+
+</script>
+
+
+
+
+    <!--<script>-->
+        <!--var foo = {-->
+            <!--bar: function() {-->
+                <!--return this.baz;-->
+            <!--},-->
+            <!--baz: 1-->
+        <!--};-->
+        <!--alert((function(){-->
+            <!--return typeof arguments[0]();-->
+        <!--})(foo.bar));-->
+    <!--</script>-->
+</body>
+</html>
